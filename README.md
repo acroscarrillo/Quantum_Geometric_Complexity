@@ -1,1 +1,0 @@
-# Quantum_Geometric_Complexity
