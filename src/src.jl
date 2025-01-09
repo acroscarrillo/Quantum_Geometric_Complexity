@@ -1,3 +1,2 @@
-# Main source code file for the project
-
-println("Hello from src.jl")
+# Source code for the project
+println("Source code loaded.")

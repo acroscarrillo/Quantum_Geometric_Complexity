@@ -1,3 +1,2 @@
-# Experiment 1 source code
-
-println("Running Experiment 1")
+# Experiment 1 code
+println("Running Experiment 1...")
