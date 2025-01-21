@@ -4,7 +4,7 @@
 
 ## Documentation
 ```@meta
-CurrentModule = Test_Module
+CurrentModule = QuantumGeometricComplexity
 ```
 
 ```@autodocs
