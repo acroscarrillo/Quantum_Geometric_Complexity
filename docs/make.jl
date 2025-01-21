@@ -1,6 +1,6 @@
 # docs/make.jl
 push!(LOAD_PATH,"../src/")
-using Documenter, Test_Module, Literate
+using Documenter, QuantumGeometricComplexity, Literate
 
 # literate the tutorial
 Literate.markdown(
