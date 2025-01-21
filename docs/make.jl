@@ -9,9 +9,9 @@ Literate.markdown(
 )
 
 makedocs(sitename="My Documentation",
-format = Documenter.HTML(
-    prettyurls = get(ENV, "CI", nothing) == "true"
-),
+# format = Documenter.HTML(
+#     prettyurls = get(ENV, "CI", nothing) == "true"
+# ),
     pages = [
         "Introduction" => "index.md",
         "Tutorial" => "exp.md"
