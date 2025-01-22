@@ -35,7 +35,7 @@ jobs:
         # versions used by the documentation package environment, you can use this
         # line instead. You just need to make sure that the package is a develop-dependency
         # in the docs/Manifest.toml
-        #run : julia --project=docs/ -e 'using Pkg; Pkg.instantiate()'
+        #run: julia --project=docs/ -e 'using Pkg; Pkg.instantiate()'
       # step 2 (note project path remains the same!)
       - name: Build and deploy
         env:
