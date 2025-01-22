@@ -23,5 +23,6 @@ makedocs(sitename="My Documentation",
 
 #https://github.com/JuliaDynamics/GoodScientificCodeWorkshop/blob/main/block5_documentation/Documenter_GitHub_deploy.yaml
 deploydocs(
-    repo = "https://github.com/acroscarrillo/minimal_working_documenter_example"
+    repo = "https://github.com/acroscarrillo/Quantum_Geometric_Complexity"
 )
+
