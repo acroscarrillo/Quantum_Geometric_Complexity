@@ -25,4 +25,3 @@ makedocs(sitename="My Documentation",
 deploydocs(
     repo = "https://github.com/acroscarrillo/minimal_working_documenter_example"
 )
-
