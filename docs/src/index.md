@@ -8,7 +8,7 @@ CurrentModule = QuantumGeometricComplexity
 ```
 
 ```@autodocs
-Modules = [Test_Module]
+Modules = [QuantumGeometricComplexity]
 ```
 
 
