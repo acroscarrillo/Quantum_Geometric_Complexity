@@ -12,5 +12,4 @@ plot(rand(100,2))
 
 
 # ### A rather boring normal
-
 histogram(randn(10000,1))
