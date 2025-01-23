@@ -29,7 +29,8 @@ makedocs(sitename="My Documentation",
         # "Numerical Experiments" => "exp.md"
         "Numerical Experiments" => ["exp_1.md",
                             "exp_2.md",
-                            "exp_3.md",]
+                            "exp_3.md",],
+        "Citing this work" => "citing.md"
     ]
 )
 
