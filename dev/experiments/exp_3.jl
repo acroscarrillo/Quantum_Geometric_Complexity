@@ -18,4 +18,4 @@ plot!(exp.(1:10))
 # This are awesone sinusoidal functions
 
 plot(sin.(-3:0.01:3))
-plot(cos.(-3:0.01:3))
+plot!(cos.(-3:0.01:3))
