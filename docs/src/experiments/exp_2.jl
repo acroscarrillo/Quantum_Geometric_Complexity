@@ -1,4 +1,4 @@
-# # [exp.jl exp](@id exp)
+# # [Scatter and Heatmap](@id exp)
 
 
 # ### An interesting scatter

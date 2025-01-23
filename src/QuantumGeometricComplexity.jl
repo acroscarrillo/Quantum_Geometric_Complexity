@@ -1,7 +1,7 @@
 # src/Test_Module.jl
 module QuantumGeometricComplexity
 
-export test
+export mul_by_2
 
 include("test.jl")
 
