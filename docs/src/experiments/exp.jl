@@ -2,7 +2,7 @@
 
 
 # ### Test plot
-
+using Pkg
 Pkg.instantiate()
 
 using Plots
