@@ -1,4 +1,4 @@
-# # [exp.jl exp](@id exp)
+# # [Plot and Histogram](@id exp)
 
 
 # ### An interesting plot

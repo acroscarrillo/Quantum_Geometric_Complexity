@@ -1,5 +1,4 @@
-# # [exp.jl exp](@id exp)
-
+# # [Exponential and Sinusoidal](@id exp)
 
 # ### An interesting exponential
 # wow what a growth
@@ -10,9 +9,6 @@ using Plots
 
 scatter(exp.(1:10))
 plot!(exp.(1:10))
-
-
-
 
 # ### A relaxing sine and cosine
 # This are awesone sinusoidal functions
