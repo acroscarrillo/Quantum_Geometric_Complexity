@@ -27,9 +27,9 @@ makedocs(sitename="My Documentation",
     pages = [
         "Introduction" => "index.md",
         # "Numerical Experiments" => "exp.md"
-        "Numerical Experiments" => ["experiments/exp_1.md",
-                            "experiments/exp_2.md",
-                            "experiments/exp_3.md",]
+        "Numerical Experiments" => ["exp_1.md",
+                            "exp_2.md",
+                            "exp_3.md",]
     ]
 )
 
