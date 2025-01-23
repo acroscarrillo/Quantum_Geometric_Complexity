@@ -4,7 +4,19 @@ using Documenter, QuantumGeometricComplexity, Literate
 
 # literate the tutorial
 Literate.markdown(
-    joinpath(@__DIR__, "src/experiments/", "exp.jl"), joinpath(@__DIR__, "src");
+    joinpath(@__DIR__, "src/experiments/", "exp_1.jl"), joinpath(@__DIR__, "src");
+    credit = false
+)
+
+# literate the tutorial
+Literate.markdown(
+    joinpath(@__DIR__, "src/experiments/", "exp_2.jl"), joinpath(@__DIR__, "src");
+    credit = false
+)
+
+# literate the tutorial
+Literate.markdown(
+    joinpath(@__DIR__, "src/experiments/", "exp_3.jl"), joinpath(@__DIR__, "src");
     credit = false
 )
 
