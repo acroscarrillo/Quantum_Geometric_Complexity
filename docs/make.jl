@@ -20,7 +20,7 @@ Literate.markdown(
     credit = false
 )
 
-makedocs(sitename="My Documentation",
+makedocs(sitename="Minimal Documentation",
 # format = Documenter.HTML(
 #     prettyurls = get(ENV, "CI", nothing) == "true"
 # ),
