@@ -7,7 +7,7 @@ This toy documentation is ment to serve as a minimal working template for your s
 It took me a while to figure this one out so I thought I might as well share it!
 
 # How it all works
-## What you already have
+### What you already have
 So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. 
 
 I believe respectable *scientific* code should be organised like so:
