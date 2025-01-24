@@ -7,25 +7,28 @@ This toy documentation is ment to serve as a minimal working template for your s
 It took me a while to figure this one out so I thought I might as well share it!
 
 # How it all works
-So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. I believe respectable code should be organised like so:
+## What you already have
+So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. 
+
+I believe respectable *scientific* code should be organised like so:
 ```
-── Manifest.toml
+── Manifest.toml        # Your enviroment's contents
 ── Project.toml 
 ── src/                 # Your source code with your module/package
 │── your_src_module.jl  
 │── other_src_code.jl
 ── experiments/
-│── exp_1/ 
-│  │── exp_1.jl  
-│  │── exp_1_data.csv  
-│  │── exp_1_fig.svg  
+│── exp_1/              # Experiment named "exp_1" 
+│  │── exp_1.jl         # "exp_1" Julia code
+│  │── exp_1_data.csv   # "exp_1" data
+│  │── exp_1_fig.svg    # "exp_1" figure
 │── exp_2/ 
 │  │── exp_2.jl  
 │  │── exp_2_data.csv  
 │  │── exp_2_fig.svg  
 ...
 ```
-If you dont recognise the `.toml` files you need to learn what a coding enviroment is and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. 
+If you dont recognise the `.toml` files you need to learn what coding enviroments are and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. So go ahead and fix your code until it follows the structure above.
 
 # Contents
 Here's the full list of contents
