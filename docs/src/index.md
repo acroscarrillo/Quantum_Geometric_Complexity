@@ -5,6 +5,26 @@ This toy documentation is ment to serve as a minimal working template for your s
 
 It took me a while to figure this one out so I thought I might as well share it!
 
+# How it all works
+So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. I beleive respectable code should be organised like so:
+```
+── Manifest.toml
+── Project.toml 
+── src/
+│── your_src_module.jl  
+│── other_src_code.jl
+── experiments/
+│── exp_1/ 
+│  │── exp_1.jl  
+│  │── exp_1_data.csv  
+│  │── exp_1_fig.svg  
+│── exp_2/ 
+│  │── exp_2.jl  
+│  │── exp_2_data.csv  
+│  │── exp_2_fig.svg  
+...
+```
+
 # Contents
 Here's the full list of contents
 ```@contents
