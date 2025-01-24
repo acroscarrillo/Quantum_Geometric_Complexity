@@ -28,7 +28,7 @@ I believe respectable *scientific* code should be organised like so:
 │  │── exp_2_fig.svg  
 ...
 ```
-If you dont recognise the `.toml` files you need to learn what Julia enviroments are and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. So go ahead and fix your code until it follows the structure above.
+If you dont recognise the `.toml` files, you need to learn what Julia enviroments are and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. So go ahead and fix your code until it follows the structure above.
 
 # Contents
 Here's the full list of contents
