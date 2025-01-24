@@ -25,8 +25,7 @@ makedocs(sitename="Minimal Documentation",
 #     prettyurls = get(ENV, "CI", nothing) == "true"
 # ),
     pages = [
-        "Introduction" => "index.md",
-        # "Numerical Experiments" => "exp.md"
+        "How to make a page like this" => "index.md",
         "Numerical Experiments" => ["exp_1.md",
                             "exp_2.md",
                             "exp_3.md",],
