@@ -1,10 +1,12 @@
 # What is this?
 Here you will learn how to make a documentation website like this one using exclusively Julia thanks to Documenter.jl from scratch for absolute beginners.
 
-# Welcome!
-This toy documentation is ment to serve as a minimal working template for your scientific work. In particular, it is well suited for basic repositories which are structured around a `/src` folder containing all the heavy lifting code which numerical experiments (inside, say `/experiments`) use. Of course, you may do something else and still find these docs useful. Ideally, all scientific papers should be accompanied by a documentation page (like this one) for faster communication/understanding and reproduction/usage. Enjoy! 
+It took me a while to figure this one out so I thought I might as well share it! Enjoy!
 
-It took me a while to figure this one out so I thought I might as well share it!
+
+# Welcome!
+This toy documentation is ment to serve as a minimal working template for your scientific work. In particular, it is well suited for basic repositories which are structured around a `/src` folder containing all the heavy lifting code which numerical experiments (inside, say `/experiments`) use. Of course, you may do something else and still find these docs useful. Ideally, all scientific papers should be accompanied by a documentation page (like this one) for faster communication/understanding and reproduction/usage.  
+
 
 # How it all works
 ### What you already have
@@ -33,7 +35,41 @@ If you dont recognise the `.toml` files, you need to learn what Julia enviroment
 So go ahead and fix your code until it follows the structure above.
 
 ### What we need to do
-Bla bla bla
+This documentation is entirely hosted in GitHub (although you can also view it locally on your machine) and it is updated automatically everytime you push an update on your code to it. Pretty neat! However, for all of that to work, we need to set things up correctly so follow closely because it is *very* finicky. 
+
+We will create a new folder on the top level called `/docs` to host our new documentation machinery. Inside `/docs` we need to do 3 things: 
+1. Create a folder `/docs/src` with a markdown file `/docs/src/index.md` which will become our first page.
+2. Create a `/docs/make.jl` julia file which will be the engine driving your documentation page.
+3. Create a new `(docs)` enviroment which we will set up for your GitHub page.
+
+All in all, your code should look like 
+```
+── Manifest.toml        
+── Project.toml 
+── src/                 
+│── your_src_module.jl  
+│── other_src_code.jl
+── experiments/
+│── exp_1/              
+│  │── exp_1.jl         
+│  │── exp_1_data.csv   
+│  │── exp_1_fig.svg    
+│── exp_2/ 
+│  │── exp_2.jl  
+│  │── exp_2_data.csv  
+│  │── exp_2_fig.svg  
+...
+── docs/
+│── src/              
+│  │── index.md      # this will become your first page  
+│── make.jl          # this will drive your ocs
+│── Manifest.toml    # your docs enviroment
+│── Project.toml 
+```
+
+### Hosting it in GitHub
+Bla Bla Bla
+
 
 # Contents
 Here's the full list of contents
