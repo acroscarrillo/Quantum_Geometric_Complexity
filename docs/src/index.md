@@ -7,11 +7,11 @@ This toy documentation is ment to serve as a minimal working template for your s
 It took me a while to figure this one out so I thought I might as well share it!
 
 # How it all works
-So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. I beleive respectable code should be organised like so:
+So you did all the hard work and have a functioning and hopefully well documented code somewhere in your machine. Now you wish to share it to the outside world in a professional and respectable manner. You are in the right place, however I dont want to know how you organised your code. I believe respectable code should be organised like so:
 ```
 ── Manifest.toml
 ── Project.toml 
-── src/
+── src/                 # Your source code with your module/package
 │── your_src_module.jl  
 │── other_src_code.jl
 ── experiments/
@@ -25,6 +25,7 @@ So you did all the hard work and have a functioning and hopefully well documente
 │  │── exp_2_fig.svg  
 ...
 ```
+If you dont recognise the `.toml` files you need to learn what a coding enviroment is and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. 
 
 # Contents
 Here's the full list of contents
