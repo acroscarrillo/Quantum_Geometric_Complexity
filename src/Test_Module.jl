@@ -1,8 +1,8 @@
 # src/Test_Module.jl
-module QuantumGeometricComplexity
+module Test_Module
 
 export mul_by_2
 
-include("test.jl")
+include("aux.jl")
 
 end # end of module

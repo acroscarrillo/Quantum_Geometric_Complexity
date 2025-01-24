@@ -7,6 +7,7 @@ It took me a while to figure this one out so I thought I might as well share it!
 # Welcome!
 This toy documentation is ment to serve as a minimal working template for your scientific work. In particular, it is well suited for basic repositories which are structured around a `/src` folder containing all the heavy lifting code which numerical experiments (inside, say `/experiments`) use. Of course, you may do something else and still find these docs useful. Ideally, all scientific papers should be accompanied by a documentation page (like this one) for faster communication/understanding and reproduction/usage.  
 
+It is always a good idea to back-up your code before embarking in this project and even starting with just a toy version and later on expand.
 
 # How it all works
 ### What you already have
@@ -33,6 +34,30 @@ I believe respectable *scientific* code should be organised like so:
 If you dont recognise the `.toml` files, you need to learn what Julia enviroments are and how to use them. It's easy, it's useful and **you wont be able to create a page like this without it**. 
 
 So go ahead and fix your code until it follows the structure above.
+
+For reproduction purposes, this very page contains the following code inside `/src`:
+```
+# src/Test_Module.jl
+module Test_Module
+
+export mul_by_2
+
+include("aux.jl")
+
+end # end of module
+```
+```
+# src/aux.jl
+""" 
+    mul_by_2(x)
+
+Multiplies x by 2.
+"""
+function mul_by_2(x) 
+    return 2*x 
+end
+```
+For this minimal toy example, we dont even have an `/experiments` folder since we will add those to the documentation exclusively. Dont worry if you do have, that's good, we will relocate it soon.
 
 ### What we need to do
 This documentation is entirely hosted in GitHub (although you can also view it locally on your machine) and it is updated automatically everytime you push an update on your code to it. Pretty neat! However, for all of that to work, we need to set things up correctly so follow closely because it is *very* finicky. 
@@ -66,6 +91,8 @@ All in all, your code should look like
 │── Manifest.toml    # your docs enviroment
 │── Project.toml 
 ```
+
+Let's take a look at the content of 
 
 ### Hosting it in GitHub
 Bla Bla Bla

@@ -1,6 +1,6 @@
 # docs/make.jl
 push!(LOAD_PATH,"../src/")
-using Documenter, QuantumGeometricComplexity, Literate
+using Documenter, Test_Module, Literate
 
 # literate the tutorial
 Literate.markdown(
@@ -21,9 +21,6 @@ Literate.markdown(
 )
 
 makedocs(sitename="Minimal Scientific Docs",
-# format = Documenter.HTML(
-#     prettyurls = get(ENV, "CI", nothing) == "true"
-# ),
     pages = [
         "How to make a page like this" => "index.md",
         "Numerical Experiments" => ["exp_1.md",
