@@ -1,4 +1,5 @@
-
+# What is this?
+Here you will learn how to make a documentation website like this one using exclusively Julia thanks to Documenter.jl from scratch.
 
 # Welcome!
 This toy documentation is ment to serve as a minimal working template for your scientific work. In particular, it is well suited for basic repositories which are structured around a `/src` folder containing all the heavy lifting code which numerical experiments (inside, say `/experiments`) use. Of course, you may do something else and still find these docs useful. Ideally, all scientific papers should be accompanied by a documentation page (like this one) for faster communication/understanding and reproduction/usage. Enjoy! 
