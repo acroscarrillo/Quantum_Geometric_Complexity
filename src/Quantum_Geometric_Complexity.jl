@@ -2,13 +2,34 @@ module Quantum_Geometric_Complexity
 
     export mul_by_2, mul_by_4
 
-    include("aux.jl")
+    include("spin_half_basis.jl")
+    include("spin_one_half_basis.jl")
+    include("clock_shift_basis.jl")
 
 
     using LinearAlgebra
     using Einsum
 
 
+    """
+    ⊗(A, B)
+
+    Computes the Kronecker product of two matrices A and B.
+    """
+    ⊗(A,B) = kron(A,B)
+
+
+    """
+    tensor_list(list_of_ops)
+
+    Computes the Kronecker product of a list of matrices.
+
+    # Arguments
+    - `list_of_ops`: A list of matrices.
+
+    # Returns
+    - The Kronecker product of all matrices in the list.
+    """
     function tensor_list(list_of_ops)
         prod = 1
         for op in list_of_ops
@@ -16,243 +37,6 @@ module Quantum_Geometric_Complexity
         end
         return prod
     end
-
-    ###########################
-    ###########################
-    ## Spin 1/2 register O_μ ##
-    ###########################
-    ###########################
-
-    σ_0 = I(2)
-    σ_1 = [[0, 1] [1, 0]]
-    σ_2 = [[0, im] [-im, 0]]
-    σ_3 = [[1, 0] [0, -1]]
-
-    σ_vec = [σ_0,σ_1,σ_2,σ_3]
-
-    ⊗(A,B) = kron(A,B)
-
-    function σ_n(n)
-        if n == 0
-            return σ_0
-        elseif n == 1
-            return σ_1
-        elseif n == 2
-            return σ_2
-        elseif n == 3
-            return σ_3
-        elseif n == "+"
-            return σ_p 
-        elseif n == "-"
-            return σ_m
-        else
-            return 0
-        end
-    end
-
-    function σ_n_j(N,n,j)
-        op_list = []
-        for i in range(1,N)
-            if i == j
-                push!(op_list,σ_n(n))
-            else
-                push!(op_list,σ_n(0))
-            end
-        end
-        return tensor_list(op_list)
-    end
-
-    function spin_combinations(i,N_spins)
-        return digits(i, base=4, pad=N_spins)
-    end
-
-    function O_basis_spin_half(N_spins)
-        O_temp = ComplexF64.( ones(2^N_spins, 2^N_spins, 4^N_spins) )
-        for n=1:(4^N_spins)
-            indx_array =  spin_combinations(n-1,N_spins)
-            element = 1
-            for m=1:N_spins
-                element = element ⊗ σ_vec[indx_array[m]+1]
-            end
-            O_temp[:,:,n] = element
-        end
-        return O_temp
-    end
-
-
-    ###########################
-    ###########################
-    ## Spin 1/1 register O_μ ##
-    ###########################
-    ###########################
-
-    S_0 = I(3)
-    S_x = [[0, 1, 0] [1, 0, 1] [0, 1, 0]] / √(2)
-    S_y = im*[[0, 1, 0] [-1, 0, 1] [0, -1, 0]] / √(2)
-    S_z = diagm([1,0,-1])
-
-    # I have checked this is an actual basis by taking its determinant
-    basis_1 = [
-        S_z,
-        S_y,
-        S_x,
-        S_y*S_z + S_z*S_y,
-        S_z*S_x + S_x*S_z,
-        S_x*S_y + S_y*S_x,
-        S_z^2,
-        S_y^2,
-        S_x^2
-    ]
-
-    ###########################
-    ###########################
-    ## Spin 3/2 register O_μ ##
-    ###########################
-    ###########################
-
-    J_0 = I(4)
-    J_x = [[0, √(3), 0, 0] [√(3), 0, 2, 0] [0, 2, 0, √(3)] [0, 0, √(3), 0]] / 2
-    J_y = im*[[0, √(3), 0, 0] [-√(3), 0, 2, 0] [0, -2, 0, √(3)] [0, 0, -√(3), 0]] / 2
-    J_z = diagm([3,1,-1,-3])/2
-
-    # I have checked this is an actual basis by taking its determinant
-    basis_3_2 = [
-        J_y*J_z + J_z*J_y,
-        J_z*J_x + J_x*J_z,
-        J_x*J_y + J_y*J_x,
-        J_z^2,
-        J_y^2,
-        J_x^2,
-        J_y^2*J_z + J_z*J_y^2,
-        J_z^2*J_y + J_y*J_z^2,
-        J_z^2*J_x + J_x*J_z^2,
-        J_x^2*J_z + J_z*J_x^2,
-        J_x^2*J_y + J_y*J_x^2,
-        J_y^2*J_x + J_x*J_y^2,
-        J_z^3,
-        J_y^3,
-        J_x^3,
-        J_x*J_y*J_z + J_y*J_z*J_x + J_z*J_x*J_y + J_y*J_x*J_z + J_z*J_y*J_x + J_x*J_z*J_y
-    ]
-
-
-    function J_n_j(N,n,j)
-        op_list = []
-        for i in range(1,N)
-            if i == j
-                push!(op_list,basis_3_2[n])
-            else
-                push!(op_list,J_0)
-            end
-        end
-        return tensor_list(op_list)
-    end
-
-    function spin_three_halfs_combinations(i,N_spins)
-        return digits(i, base=16, pad=N_spins)
-    end
-
-    function O_basis_spin_three_half(N_spins)
-        O_temp = ComplexF64.( ones(4^N_spins, 4^N_spins, 16^N_spins) )
-        for n=1:(16^N_spins)
-            indx_array =  spin_three_halfs_combinations(n-1,N_spins)
-            element = 1
-            for m=1:N_spins
-                element = element ⊗ basis_3_2[indx_array[m]+1]
-            end
-            O_temp[:,:,n] = element
-        end
-        return O_temp
-    end
-
-
-    ##############################
-    ##############################
-    ## Clock Shift register O_μ ##
-    ##############################
-    ##############################
-
-
-    function Shift(N)
-        S_temp = zeros(N,N)
-        for n=1:(N-1)
-            S_temp[n+1,n] = 1
-        end
-        S_temp[1,end] = 1
-        return S_temp
-    end
-
-    """
-    Clock(N)
-
-    FINISH!! 
-
-    Return the Clock matrix...
-
-    # Performance comment
-    It is much more efficient if returned in `Diagonal` object:
-    ```julia-repl
-    julia> @btime Clock(1000)^2 # Diagonal object
-    v  11.125 μs (3 allocations: 39.75 KiB)
-    1000×1000 Diagonal{ComplexF64, Vector{ComplexF64}}:
-        (output ommitted)
-    
-    julia> @btime Clock_diagm(1000)^2 # Matrix object
-    37.858 ms (6 allocations: 30.54 MiB)
-    1000×1000 Matrix{ComplexF64}:
-        (output ommitted)
-    ````
-    """
-    function Clock(N)
-        n_array = Vector(0:N-1)
-        diag = exp.(im * 2 * π .* n_array ./ N)
-        return Diagonal(diag)
-    end
-
-    """
-    # Performance comment
-    Some benchmarks:
-    ```julia-repl
-    julia> @btime O_basis_bosons(20)
-    885.291 μs (1286 allocations: 11.59 MiB)
-    20×20×400 Array{ComplexF64, 3}:
-
-    julia> @btime O_basis_bosons(100)
-    1.105 s (51410 allocations: 6.78 GiB)
-    ```
-    so we seem to be limited by memory unsurprisingly again.
-    """
-    function O_basis_bosons(N)
-        S_temp = Shift(N)
-        C_temp = Clock(N)
-
-        O_temp = ComplexF64.( ones(N, N, N^2) )
-
-        counter = 1
-        for jj=0:N-1
-            j = jj+N÷2
-            S_temp_pwred = S_temp^(j)
-            for kk=0:N-1
-                k = kk-N÷2
-                C_temp_pwred = C_temp^(k)
-                exponent = exp( -im* 1 * π * j * k / N )
-                O_temp[:,:,counter] = exponent * C_temp_pwred * S_temp_pwred
-                counter += 1
-            end
-        end 
-        return O_temp
-    end
-
-    function O_basis_dual_bosons(N)
-        return O_basis_bosons(N) /√(N)
-    end
-
-
-    ############################
-    ############################
-    ## general functionalities #
-    ############################
-    ############################
 
     """
     ρ_vec(ρ, O_basis)

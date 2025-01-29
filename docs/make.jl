@@ -12,14 +12,10 @@ end
 # group all generated md files inside src/experiments/markdown"
 experiments_md_files = ["experiments/markdown/" * file for file in readdir(joinpath(@__DIR__, "src/experiments/markdown"))]
 
-display("beging makedocs...")
-display(@__DIR__)
-display(experiments_md_files)
-
 makedocs(sitename="Quantum Geometric Complexity",
     pages = [
+        "Home" => "index.md",
         "Reference" => "reference.md",
-        "Home" => "home.md",
         "Numerical Experiments" => experiments_md_files,
         "Citing this work" => "citing.md"
     ]
