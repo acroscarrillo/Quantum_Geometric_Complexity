@@ -1,4 +1,3 @@
-# src/MinimalScientificDocs.jl
 module Quantum_Geometric_Complexity
 
     export mul_by_2, mul_by_4
@@ -528,10 +527,12 @@ module Quantum_Geometric_Complexity
         ent = 0
         for n=1:N
             if ρ_μ[n] != 0
-                ent +=  - (ρ_μ[n]' * ρ_μ[n] /sum_tot) * log2(ρ_μ[n]' * ρ_μ[n] /sum_tot)
+                ent +=  - (ρ_μ[n]' * ρ_μ[n] /sum_tot) * log2(ρ_μ[n]' * ρ_μ[n] / sum_tot)
             end        
         end
         return real( ent )
     end
 
 end # end of module
+
+aasdas = 1
