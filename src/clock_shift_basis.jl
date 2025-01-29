@@ -1,3 +1,5 @@
+using LinearAlgebra
+
 ##############################
 ##############################
 ## Clock Shift register O_μ ##

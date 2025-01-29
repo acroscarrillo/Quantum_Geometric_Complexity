@@ -1,3 +1,5 @@
+using LinearAlgebra
+
 #######################
 #######################
 ## Spin 1/2 register ##
