@@ -1,7 +1,7 @@
-# # [Exponential and Sinusoidal](@id exp)
+# # [Mock numerical study](@id exp)
 
-# ### An interesting exponential
-# wow what a growth
+# ### Dynamics of $M$ at different magnetic flux $\phi$
+# In this numerical experiment, we study the dynamics of $M$ as the magnetic flux $\phi$ is varied at fixed temperature $T$ and 
 using Pkg
 Pkg.instantiate()
 
