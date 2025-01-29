@@ -534,5 +534,3 @@ module Quantum_Geometric_Complexity
     end
 
 end # end of module
-
-aasdas = 1
