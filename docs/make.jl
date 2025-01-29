@@ -16,7 +16,7 @@ display("beging makedocs...")
 display(@__DIR__)
 display(experiments_md_files)
 
-makedocs(sitename="Minimal Scientific Docs",
+makedocs(sitename="Quantum Geometric Complexity",
     pages = [
         "How to make a page like this" => "index.md",
         "Home" => "home.md",

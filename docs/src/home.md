@@ -17,11 +17,11 @@ Here's the full list of contents of this website.
 ## Documentation
 Here's the code documentation. 
 ```@meta
-CurrentModule = MinimalScientificDocs
+CurrentModule = Quantum_Geometric_Complexity
 ```
 
 ```@autodocs
-Modules = [MinimalScientificDocs]
+Modules = [Quantum_Geometric_Complexity]
 ```
 
 
