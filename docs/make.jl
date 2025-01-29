@@ -18,31 +18,13 @@ display(experiments_md_files)
 
 makedocs(sitename="Quantum Geometric Complexity",
     pages = [
-        "How to make a page like this" => "index.md",
+        "Reference" => "docs.md",
         "Home" => "home.md",
         "Numerical Experiments" => experiments_md_files,
         "Citing this work" => "citing.md"
     ]
 )
 display("finished makedocs!")
-
-
-# # literate the tutorial
-# Literate.markdown(
-#     joinpath(@__DIR__, "src/experiments/", "exp_2.jl"), joinpath(@__DIR__, "src");
-#     credit = false
-# )
-
-# makedocs(sitename="Minimal Scientific Docs",
-#     pages = [
-#         "How to make a page like this" => "index.md",
-#         "Home" => "home.md",
-#         "Numerical Experiments" => ["exp_1.md",
-#                             "exp_2.md",
-#                             "exp_3.md",],
-#         "Citing this work" => "citing.md"
-#     ]
-# )
 
 deploydocs(
     repo = "https://github.com/acroscarrillo/Quantum_Geometric_Complexity"
