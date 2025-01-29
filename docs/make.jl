@@ -18,7 +18,7 @@ display(experiments_md_files)
 
 makedocs(sitename="Quantum Geometric Complexity",
     pages = [
-        "Reference" => "docs.md",
+        "Reference" => "reference.md",
         "Home" => "home.md",
         "Numerical Experiments" => experiments_md_files,
         "Citing this work" => "citing.md"
