@@ -41,8 +41,7 @@ module Quantum_Geometric_Complexity
     """
     `ρ_vec(ρ, B_basis)`
 
-    Converts density matrix ``\\rho \\in \\mathcal{H} \\times \\mathcal{H}`` to its vector representation in characteristic space ``\\mathcal{C}`` spanned by ``\mathcal{B}``.
-    That is, mathematically, it's a function 
+    Converts density matrix ``\\rho \\in \\mathcal{H} \\times \\mathcal{H}`` to its vector representation in characteristic space ``\\mathcal{C}`` spanned by ``\\mathcal{B}``. That is, mathematically, it's a function 
     ```
     ρ_vec : H×H,B → C
     ```
