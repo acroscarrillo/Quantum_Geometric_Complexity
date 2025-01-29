@@ -12,7 +12,7 @@ module Quantum_Geometric_Complexity
 
 
     """
-    ⊗(A, B)
+    `⊗(A, B)`
 
     Computes the Kronecker product of two matrices A and B.
     """
@@ -20,7 +20,7 @@ module Quantum_Geometric_Complexity
 
 
     """
-    tensor_list(list_of_ops)
+    `tensor_list(list_of_ops)`
 
     Computes the Kronecker product of a list of matrices.
 
@@ -39,22 +39,22 @@ module Quantum_Geometric_Complexity
     end
 
     """
-    ρ_vec(ρ, O_basis)
+    `ρ_vec(ρ, B_basis)`
 
-    Converts density matrix ``\\rho \\in \\mathcal{H} \\times \\mathcal{H}`` to its vector representation in characteristic space `C` spanned by `O`.
+    Converts density matrix ``\\rho \\in \\mathcal{H} \\times \\mathcal{H}`` to its vector representation in characteristic space ``\\mathcal{C}`` spanned by ``\mathcal{B}``.
     That is, mathematically, it's a function 
     ```
-    ρ_vec : H×H,O → C
+    ρ_vec : H×H,B → C
     ```
 
     # Performance comment
     This function used to be written as 
     ```
-    function ρ_vec(ρ, O_basis)
-        N = size(O_basis)[3]
+    function ρ_vec(ρ, B_basis)
+        N = size(B_basis)[3]
         ρ_temp = ComplexF64.(zeros(N))
         for n=1:N
-            ρ_temp[n] = tr(ρ*O_basis[:,:,n])
+            ρ_temp[n] = tr(ρ*B_basis[:,:,n])
         end
         return ρ_temp
     end
@@ -63,20 +63,20 @@ module Quantum_Geometric_Complexity
     but it had performance issues:
     ```julia-repl
     julia> ρ = rand_ρ(7) # output ommited
-    julia> O_basis = O_basis_spin_half(7) # output ommited
-    julia> @btime ρ_vec(ρ,O_basis)
+    julia> B_basis = B_basis_spin_half(7) # output ommited
+    julia> @btime ρ_vec(ρ,B_basis)
     3.413 s (65540 allocations: 8.00 GiB)
     (further output ommited)
-    julia> @btime ρ_vec_einsum(ρ,O_basis)
+    julia> @btime ρ_vec_einsum(ρ,B_basis)
     346.840 ms (2 allocations: 256.05 KiB)
     (further output ommited)
     ```
 
-    so current default implementation is with `Einsum`.
+    so current default implementation is with `Einsum.jl`.
 
     # Examples
     ```julia-repl
-    julia> O_basis = O_basis_spin_half(1)
+    julia> B_basis = B_basis_spin_half(1)
     2×2×4 Array{ComplexF64, 3}:
     [:, :, 1] =
     0.707107+0.0im       0.0+0.0im
@@ -99,7 +99,7 @@ module Quantum_Geometric_Complexity
     0.7071067811865475
     0.7071067811865475
 
-    julia> ρ_vec(ψ*ψ', O_basis)
+    julia> ρ_vec(ψ*ψ', B_basis)
     4-element Vector{ComplexF64}:
     0.7071067811865474 + 0.0im
     0.7071067811865474 + 0.0im
@@ -107,26 +107,26 @@ module Quantum_Geometric_Complexity
                     0.0 + 0.0im
     ```
     """
-    function ρ_vec(ρ, O_basis)
+    function ρ_vec(ρ, B_basis)
         N = size(ρ)[1]
-        @einsum ρ_temp[μ] := (1/N) * ρ[j,k]*conj(O_basis[j,k,μ])
+        @einsum ρ_temp[μ] := (1/N) * ρ[j,k]*conj(B_basis[j,k,μ])
         return ρ_temp
     end
 
     """
-    ρ_mat(ρ, O_basis)
+    `ρ_mat(ρ, B_basis)`
 
-    Inverse of `ρ_mat`, that is, converts vector in characteristic space `C` to its Hilbert space representation in `H×H`. That is, mathematically, it's a function 
+    Inverse of `ρ_mat`, that is, converts vector in characteristic space ``\\mathcal{C}`` back to its Hilbert space representation in ``\\mathcal{H} \\times \\mathcal{H}``. That is, mathematically, it's a function 
     ```
     ρ_vec : C,O → H×H
     ```
 
     # Performance comment
-    This function also suffered from performance issues like `ρ_vec(ρ, O_basis)` which were also solved with `Einsum`. For more details see `ρ_vec(ρ, O_basis)` documentation.
+    This function also suffered from performance issues like `ρ_vec(ρ, B_basis)` which were also solved with `Einsum.jl`. For more details see `ρ_vec(ρ, B_basis)` documentation.
 
     # Examples
     ```julia-repl
-    julia> O_basis = O_basis_spin_half(1)
+    julia> B_basis = B_basis_spin_half(1)
     2×2×4 Array{ComplexF64, 3}:
     [:, :, 1] =
         0.707107+0.0im       0.0+0.0im
@@ -149,14 +149,14 @@ module Quantum_Geometric_Complexity
         0.7071067811865475
         0.7071067811865475
 
-    julia> ρ_μ = ρ_vec(ψ*ψ', O_basis)
+    julia> ρ_μ = ρ_vec(ψ*ψ', B_basis)
     4-element Vector{ComplexF64}:
         0.7071067811865474 + 0.0im
         0.7071067811865474 + 0.0im
                     0.0 + 0.0im
                     0.0 + 0.0im
 
-    julia> ρ_mat(ρ_μ, O_basis)
+    julia> ρ_mat(ρ_μ, B_basis)
     2×2 Matrix{ComplexF64}:
         0.5+0.0im  0.5+0.0im
         0.5+0.0im  0.5+0.0im
@@ -167,20 +167,19 @@ module Quantum_Geometric_Complexity
         0.5  0.5
     ```
     """
-    function ρ_mat(ρ_vec, O_basis)
-        @einsum ρ_temp[j,k] :=  ρ_vec[μ]*O_basis[j,k,μ]
+    function ρ_mat(ρ_vec, B_basis)
+        @einsum ρ_temp[j,k] :=  ρ_vec[μ]*B_basis[j,k,μ]
         return ρ_temp
     end
 
     """
-    IPR(v)
+    `IPR(v)`
 
     Function for calculating the inverse participation ratio.
 
-    Mathematically, given some vector `v` in some basis, this is defined as 
-    ```
-    IPR(v) ≐ \\sum_n || v_n ||^4.
-    ```
+    Mathematically, given some vector ``v`` in some basis, this is defined as 
+    
+    ``IPR(v) ≐ \\sum_n || v_n ||^4.``
 
     # Examples
     ```julia-repl
@@ -212,7 +211,7 @@ module Quantum_Geometric_Complexity
 
     # Examples
     ```julia-repl
-    julia> ρ_vec_temp = ρ_vec(rand_ρ_pure(3), O_basis_spin_half(3))
+    julia> ρ_vec_temp = ρ_vec(rand_ρ_pure(3), B_basis_spin_half(3))
     64-element Vector{ComplexF64}:
     0.35355339059327373 + 0.0im
     -0.19777757955054376 - 4.336808689942018e-19im
@@ -231,7 +230,7 @@ module Quantum_Geometric_Complexity
 
     purity
 
-    julia> ρ_vec_temp = ρ_vec(I(2^3)/2^3, O_basis_spin_half(3))
+    julia> ρ_vec_temp = ρ_vec(I(2^3)/2^3, B_basis_spin_half(3))
     64-element Vector{ComplexF64}:
     0.35355339059327373 + 0.0im
                     0.0 + 0.0im
@@ -251,7 +250,7 @@ module Quantum_Geometric_Complexity
     julia> 1/(2^3)
     0.125
 
-    julia> ρ_vec_temp = ρ_vec(rand_ρ_pure(3), O_basis_spin_half(3))
+    julia> ρ_vec_temp = ρ_vec(rand_ρ_pure(3), B_basis_spin_half(3))
     64-element Vector{ComplexF64}:
     0.35355339059327373 + 0.0im
     -0.14065223381828953 + 5.204170427930421e-18im
@@ -276,7 +275,7 @@ module Quantum_Geometric_Complexity
 
 
     """
-    M(ρ, O_basis)
+    M(ρ, B_basis)
 
     Function for calculating the macroscopicity `M` of a density matrix in Hilbert space `H×H`.
 
@@ -288,15 +287,15 @@ module Quantum_Geometric_Complexity
 
     # Examples
     ```julia-repl
-    julia> M(I(2^3)/(2^3), O_basis_spin_half(3))
+    julia> M(I(2^3)/(2^3), B_basis_spin_half(3))
     -0.0
 
-    julia> M(rand_ρ_pure(3), O_basis_spin_half(3))
+    julia> M(rand_ρ_pure(3), B_basis_spin_half(3))
     4.062587703134164
     ```
     """
-    function M(ρ, O_basis)
-        ρ_vec_temp = ρ_vec(ρ, O_basis)
+    function M(ρ, B_basis)
+        ρ_vec_temp = ρ_vec(ρ, B_basis)
         N_squared = length(ρ_vec_temp)
         IPR_ρ = IPR(ρ_vec_temp)
         γ = purity(ρ_vec_temp)
@@ -304,8 +303,8 @@ module Quantum_Geometric_Complexity
     end 
 
 
-    function M_vn(ρ, O_basis)
-        ρ_μ = ρ_vec(ρ, O_basis)
+    function M_vn(ρ, B_basis)
+        ρ_μ = ρ_vec(ρ, B_basis)
         N = length(ρ_μ)
         sum_tot = ρ_μ'*ρ_μ
         ent = 0
